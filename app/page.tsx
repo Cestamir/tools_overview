@@ -1,16 +1,9 @@
 
-
-import { title } from "process"
+import { tools } from "@/lib/constants"
 import ExploreBtn from "./components/ExploreBtn"
-import EventCard from "./components/EventCard"
+import ToolCard from "./components/ToolCard"
 
-const tools = [
-{image: '/laptop-tools.jpg',title: "Event 1"},
-{image: '/laptop-tools.jpg',title: "Event 2"},
-{image: '/laptop-tools.jpg',title: "Event 3"},
-{image: '/laptop-tools.jpg',title: "Event 4"},
-{image: '/laptop-tools.jpg',title: "Event 5"},
-]
+
 
 const Home = () => {
   return (
@@ -28,7 +21,7 @@ const Home = () => {
         <ul className="grid md:grid-cols-3 gap-10 sm:grid-cols-2 grid-cols-1">
           {tools.map((tool) => (
             <li key={tool.title}>
-              <EventCard title={tool.title} image={tool.image}/>
+              <ToolCard title={tool.title} image={tool.image} slug={tool.slug} main={tool.main} price={tool.price} features={tool.features} url={tool.url} type={tool.type}/>
             </li>
           ))}
         </ul>
