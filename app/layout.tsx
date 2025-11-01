@@ -2,8 +2,10 @@ import type { Metadata } from "next";
 import { Pirata_One, Funnel_Sans } from "next/font/google";
 import "./globals.css";
 import RippleGrid from './components/RippleGrid';
+import Navbar from "./components/Navbar";
 
-const pirata = Pirata_One({
+
+const pirata = Pirata_One({ 
   variable: "--font-main",
   subsets: ["latin"],
   weight:["400"],
@@ -30,7 +32,22 @@ export default function RootLayout({
       <body
         className={`${pirata.variable} ${funnel.variable} antialiased min-h-screen`}
       >
-        {children}
+        <Navbar/>
+        <div className="absolute inset-0 top-0 z-[-1] min-h-screen">
+          <RippleGrid
+            enableRainbow={true}  
+            gridColor="#ffffff"
+            rippleIntensity={0.02}
+            gridSize={3}
+            gridThickness={20}
+            mouseInteraction={true}
+            mouseInteractionRadius={1}
+            opacity={1}
+          />
+        </div>
+        <main>
+          {children}
+        </main>
       </body>
     </html>
   );
