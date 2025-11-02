@@ -54,8 +54,14 @@ export async function connectMongo(): Promise<Mongoose> {
     cached.promise = mongoose.connect(MONGODB_URI!, options);
   }
 
-  cached.conn = await cached.promise;
-  return cached.conn;
+  try {
+    cached.conn = await cached.promise;
+    return cached.conn;
+  } catch (error) {
+    cached.promise = null;
+    cached.conn = null;
+    throw error;
+  }
 }
 
 /**
