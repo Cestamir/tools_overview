@@ -23,11 +23,6 @@ declare global {
  */
 const MONGODB_URI = process.env.MONGODB_URI as string | undefined;
 
-if (!MONGODB_URI) {
-  throw new Error(
-    'Missing environment variable: MONGODB_URI. Please set it to your MongoDB connection string.'
-  );
-}
 
 // Initialize the cache once per server process.
 const cached: Cached = globalThis.__mongoose ?? (globalThis.__mongoose = { conn: null, promise: null });
@@ -42,6 +37,11 @@ export async function connectMongo(): Promise<Mongoose> {
 
   if (!cached.promise) {
     // Sensible defaults; tune pool size for your workload.
+    if (!MONGODB_URI) {
+      throw new Error(
+        'Missing environment variable: MONGODB_URI. Please set it to your MongoDB connection string.'
+      );
+    }
     const options: ConnectOptions = {
       // Disable Mongoose's internal buffering; surface errors immediately
       bufferCommands: false,
