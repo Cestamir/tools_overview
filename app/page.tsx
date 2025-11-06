@@ -1,11 +1,18 @@
 
 import { tools } from "@/lib/constants"
-import ExploreBtn from "./components/ExploreBtn"
-import ToolCard from "./components/ToolCard"
+import ExploreBtn from "../components/ExploreBtn"
+import ToolCard from "../components/ToolCard"
+import { ITool } from "@/database";
+
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+
+const Home = async () => {
+
+  const response = await fetch(`${BASE_URL}/api/tools`)
+  const {tools} = await response.json();
 
 
 
-const Home = () => {
   return (
     <section >
       <div style={{position: 'absolute',zIndex: "2",  top: "100px",left: "50%",transform: "translate(-50%, -50%)"}} 
@@ -19,8 +26,8 @@ const Home = () => {
         <h3>Featured Tools</h3>
         {/* tools grid */}
         <ul className="grid md:grid-cols-3 gap-10 sm:grid-cols-2 grid-cols-1">
-          {tools.map((tool) => (
-            <li key={tool.title}>
+          {tools && tools.length > 0 && tools.map((tool : ITool) => (
+            <li key={tool.title} className="list-none">
               <ToolCard title={tool.title} image={tool.image} slug={tool.slug} main={tool.main} price={tool.price} features={tool.features} url={tool.url} type={tool.type}/>
             </li>
           ))}

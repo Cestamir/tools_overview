@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Pirata_One, Funnel_Sans } from "next/font/google";
 import "./globals.css";
-import RippleGrid from './components/RippleGrid';
-import Navbar from "./components/Navbar";
+import RippleGrid from '../components/RippleGrid';
+import Navbar from "../components/Navbar";
 
 
 const pirata = Pirata_One({ 
