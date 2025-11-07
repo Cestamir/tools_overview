@@ -3,12 +3,14 @@ import { tools } from "@/lib/constants"
 import ExploreBtn from "../components/ExploreBtn"
 import ToolCard from "../components/ToolCard"
 import { ITool } from "@/database";
+import { cacheLife } from "next/cache";
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 const Home = async () => {
-
-  const response = await fetch(`${BASE_URL}/api/tools`)
+  'use cache';
+  cacheLife('hours')
+  const response = await fetch(`${BASE_URL}/api/tools`);
   const {tools} = await response.json();
 
 
